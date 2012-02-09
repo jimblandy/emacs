@@ -184,7 +184,7 @@
 	* progmodes/gdb-mi.el (gdb-mi-quote): New function.
 	(gdb-send): Apply it to the operand of the '-interpreter-exec
 	console' command, so that we can pass arguments with (say) quotes
-	in them.
+	in them. Store the exact string sent in gdb-debug-log.
 
 2012-02-03  Glenn Morris  <rgm@gnu.org>
 

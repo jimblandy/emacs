@@ -1692,11 +1692,10 @@ static char *magick[] = {
 (defun gdb-mi-quote (string)
   "Return STRING quoted properly as an MI argument.
 The string is enclosed in double quotes.
-All embedded quotes are replaced with \"\\\"\".
-All embedded newlines are replaced with \"\\n\"."
-  (let* ((quotes (replace-regexp-in-string "\"" "\\\"" string t t))
-         (newlines (replace-regexp-in-string "\n" "\\n" quotes t t)))
-    (concat "\"" newlines "\"")))
+All embedded quotes, newlines, and backslashes are preceded with a backslash."
+  (setq string (replace-regexp-in-string "\\([\"\\]\\)" "\\\\\\&" string))
+  (setq string (replace-regexp-in-string "\n" "\\n" string t t))
+  (concat "\"" string "\""))
 
 (defun gdb-input (command handler-function)
   "Send COMMAND to GDB via the MI interface.
